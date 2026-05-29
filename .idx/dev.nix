@@ -27,7 +27,20 @@
     };
     # Workspace lifecycle hooks
     workspace = {
-      # Runs when a workspace is first created
+      # Runs when a wo// ... (代码上半部分)
+
+    // --- Video element ---
+    const video = document.createElement('video');
+    video.src = '../assets/final video.mov'; // <--- 就是这行
+    video.loop = true;
+    // ...
+
+    // --- Audio element ---
+    const audio = document.createElement('audio');
+    audio.src = '../assets/assets/my_audio.MP3'; // <--- 还有这行
+    audio.loop = true;
+// ... (代码下半部分)
+rkspace is first created
       onCreate = {
         # Example: install JS dependencies from NPM
         # npm-install = "npm install";
