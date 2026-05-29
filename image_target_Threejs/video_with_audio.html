@@ -44,6 +44,18 @@
     audio.crossOrigin = 'anonymous';
     audio.pause();
 
+    // Safari requires a user gesture to unlock media playback.
+    const unlockMedia = () => {
+      video.play();
+      video.pause();
+      audio.play();
+      audio.pause();
+      document.body.removeEventListener('click', unlockMedia);
+      document.body.removeEventListener('touchstart', unlockMedia);
+    };
+    document.body.addEventListener('click', unlockMedia);
+    document.body.addEventListener('touchstart', unlockMedia);
+
     // --- Chromakey shader material ---
     const videoTexture = new THREE.VideoTexture(video);
     videoTexture.minFilter = THREE.LinearFilter;
@@ -53,7 +65,7 @@
       uniforms: {
         myTexture: { value: videoTexture },
         color: { value: new THREE.Color(0x00FF00) },
-        chroma: { value: false }
+        chroma: { value: true }
       },
       vertexShader: `
         varying vec2 vUv;
@@ -79,11 +91,10 @@
     });
 
     const plane = new THREE.Mesh(
-      new THREE.PlaneGeometry(1, 1),
+      new THREE.PlaneGeometry(2, 1.5),
       chromakeyMaterial
     );
     plane.position.set(0, 0, 0);
-    plane.rotation.z = -Math.PI / 2;
     group.add(plane);
 
     // --- Start XR8 ---
