@@ -82,7 +82,7 @@
       uniforms: {
         myTexture: { value: videoTexture },
         color: { value: new THREE.Color(0x00FF00) },
-        chroma: { value: true }
+        chroma: { value: false }
       },
       vertexShader: `
         varying vec2 vUv;
@@ -112,7 +112,7 @@
       chromakeyMaterial
     );
     plane.position.set(0, 0, 0);
-    plane.rotation.z = Math.PI / 2.;
+    plane.rotation.z = -Math.PI / 2.;
     group.add(plane);
 
     const initXR = async () => {
